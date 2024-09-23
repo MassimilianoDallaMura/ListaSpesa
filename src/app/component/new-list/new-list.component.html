@@ -1,0 +1,103 @@
+<div class="container content">
+
+    <!-- Campo di input per inserire la voce della lista -->
+    <div class="input-section" style="padding-top: 60px;">
+      <div class="row" style="align-self: center; justify-content: center;">
+        <!-- Campo di input per il prodotto --> 
+        <div class="col-6">
+          <label for="voceLista">Inserisci prodotto</label>
+          <input type="text" class="form-control-input" id="voceLista" placeholder="Inserisci prodotto"
+                  [(ngModel)]="nuovoProdotto.name" (input)="onProductNameChange()" aria-label="Voce della lista">
+          <ul *ngIf="suggestions.length > 0" class="suggestions-list">
+            <li *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">
+            {{ suggestion }}
+            </li>
+          </ul>
+        </div>
+        <!-- Campo select per la categoria -->
+        <div class="col-4">
+          <label for="category">Categoria</label>
+          <select class="form-control-input" [(ngModel)]="nuovoProdotto.category" id="category">
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary mt-2" type="button" id="btnAggiungi" (click)="addProduct()"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+  
+  <!-- Lista dei prodotti -->
+  <div class="list row d-flex" style="margin-top: 140px; margin-bottom: 40px;">
+    <div class="scrollable-list">
+      <div class="list-group" style="margin-bottom: 60px;">
+        <div class="row">
+          <div class="col-6 col-sm-4 col-md-3 mb-3" *ngFor="let prodotto of list">
+            <card [ngClass]="{ 'selected': prodotto.checked, 'border-red': !prodotto.checked, }"
+                  [ngStyle]="{ 'background-color': prodotto.color }"
+                  class="list-group-item d-flex flex-column justify-content-between align-items-center"
+                  
+                  (click)="toggleChecked(prodotto)"> 
+              <div class="card-content">
+                <div class="product-name">
+                  <p>
+                  {{ prodotto.name }}
+                </p>
+                  
+                </div>
+                <div class="price-input">
+                  <input type="number" class="form-control" [(ngModel)]="prodotto.price" placeholder="€" (change)="onPriceChange(prodotto)">
+                </div>
+              </div>
+            
+         
+            </card>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+    <!-- Totale dei prodotti checkati e non checkati -->
+    <div class="total-section" style="margin-bottom: 30px;">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-6 d-flex flex-column align-items-start justify-content-center">
+          <div class="total-check-box green-box">
+            <i class="fas fa-check-circle icon-green"></i>
+            <h6 class="d-inline-block ml-2"> {{ totalChecked | currency:'EUR' }}</h6>
+          </div>
+          <div class="total-unCheck-box red-box m-0">
+            <i class="fas fa-times-circle icon-red m-0"></i>
+            <h6 class="d-inline-block ml-2"> {{ totalUnchecked | currency:'EUR' }}</h6>
+          </div>
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-center">
+          <div class="align-items-center justify-content-center" style="margin-right: 20px;">
+            <h6 style="text-align: center;">Totale: {{ total | currency:'EUR'}}</h6>
+            <p style="margin-top: 30px; text-align: center; font-size: 12px;">
+                <button (click)="openModal()">salva e chiudi spesa</button>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modale -->
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+   <i class="fas fa-times mb-2" (click)="closeModal()"></i>
+      <h4>Salva la tua lista</h4>
+      <p>Vuoi salvare la lista? Inserisci il nome:</p>
+      <input type="text" [(ngModel)]="newListName" placeholder="Nome della lista" class="form-control">
+      <button class="btn btn-primary mt-2" (click)="saveList()">Salva</button>
+    </div>
+  </div>
+  
+  </div>
+  
+  
+  
+  

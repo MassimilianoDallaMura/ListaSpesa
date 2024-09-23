@@ -1,0 +1,40 @@
+<div class="container" style="margin-top: 80px;">
+    <h2>Liste della Spesa Salvate</h2>
+    <ul *ngIf="nomiListe.length > 0; else noListe">
+      <!-- Ogni nome di lista è cliccabile e apre la modale -->
+      <li *ngFor="let nomeLista of nomiListe">
+        <!-- <a href="#" (click)="openModal(nomeLista)">{{ nomeLista }}</a> -->
+      </li>
+    </ul>
+  
+    <ng-template #noListe>
+      <p>Non ci sono liste della spesa salvate.</p>
+    </ng-template>
+  </div>
+  
+  <!-- Modale per mostrare i dettagli della lista selezionata -->
+  <div *ngIf="showModal" class="modal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Dettagli della Lista: {{ nomeListaSelezionata }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <ul *ngIf="listaSelezionata; e6se noProducts">
+            <li *ngFor="let prodotto of listaSelezionata">
+              {{ prodotto.name }} - €{{ prodotto.price }} - {{ prodotto.quantity }}x
+            </li>
+          </ul>
+  
+          <ng-template #noProducts>
+            <p>Non ci sono prodotti in questa lista.</p>
+          </ng-template>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

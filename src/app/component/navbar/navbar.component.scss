@@ -1,0 +1,42 @@
+/* Stile per la navbar mobile */
+.navbar-mobile {
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  /* Contenitore della navbar, usa flexbox per disporre gli elementi in fila */
+  .navbar-container {
+    display: flex;
+    justify-content: space-between; /* Spaziatura uniforme tra gli elementi */
+    align-items: center; /* Centratura verticale degli elementi */
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  /* Stile per ciascun elemento della navbar */
+  .navbar-item {
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* Logo a sinistra */
+  .navbar-logo {
+    height: 40px; /* Altezza del logo */
+  }
+  
+  /* Stile per le icone nella navbar */
+  .navbar-icon {
+    font-size: 24px;
+    color: white;
+  }
+  
+  .navbar-item a {
+    color: white;
+    text-decoration: none;
+  }
+  

@@ -1,0 +1,19 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid red; /* Cambia il colore e lo stile secondo le tue preferenze */
+    pointer-events: none; /* Assicurati che l'overlay non blocchi il video */
+    box-sizing: border-box;
+    background-color: transparent;
+  }
+  
+  .barcode-result {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+  }
+  
